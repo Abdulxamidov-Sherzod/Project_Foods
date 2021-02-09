@@ -1,0 +1,23 @@
+body{
+    margin:0;
+    padding:0;
+    box-shadow: border-box;
+    user-select: none;
+}
+
+.table-info{
+    text-align: center;
+}
+.like-icon{
+    cursor: pointer;
+    transition: .4s all linear;
+}
+.like-icon:active{
+    transform: scale(0.8)
+}
+.list-group-item{
+    cursor: pointer;
+}
+thead > tr > th:not(:last-child){
+    cursor: pointer;
+}
