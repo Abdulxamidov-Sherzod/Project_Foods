@@ -9,7 +9,7 @@ const foods = [
     unit: "Dona",
     category: { _id: "5fe5c183db9b000a30e0774a", name: "Ichimlik" },
   },
-  
+
   {
     _id: "5fe5c220db9b000a30e0774d",
     title: "Kavob",

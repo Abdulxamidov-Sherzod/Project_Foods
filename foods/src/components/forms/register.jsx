@@ -1,77 +1,39 @@
-import React, { Component, createRef } from "react";
+import { Component, createRef } from "react";
+import Joi from "joi-browser";
+import Form from "../common/form";
 
-export default class Register extends Component {
+export default class Register extends Form {
+  h1stil = createRef();
+
   state = {
-    account: {
+    data: {
       username: "",
       email: "",
       password: "",
     },
+    errors: {},
+    title: "Register",
   };
 
-  hanleChange = (e) => {
-    const { value, name } = e.currentTarget;
-    this.setState({
-      account: { ...this.state.account, [name]: value },
-    });
+  schema = {
+    username: Joi.string().min(3).max(30).required(),
+    email: Joi.string().min(10).required().label("Email"),
+    password: Joi.string().min(4).required(),
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state.account);
+  doSubmit = () => {
+    console.log("Success operation Register...");
   };
 
-  title = createRef(null);
-
-  componentDidMount() {
-    this.title.current.style.color = "red";
-  }
   render() {
     return (
       <div className="col-md-6 offset-3">
-        <h2 ref={this.title} className="text-center">
-          Register component
-        </h2>
+        <this.renderTitle />
         <form>
-          <div className="form-goup">
-            <label htmlFor="username">Username :</label>
-            <input
-              value={this.state.account.username}
-              name="username"
-              autoFocus
-              id="username"
-              className="form-control"
-              onChange={this.hanleChange}
-            />
-          </div>
-          <div className="form-goup">
-            <label htmlFor="email">Email :</label>
-            <input
-              value={this.state.account.email}
-              name="email"
-              id="email"
-              type="email"
-              className="form-control"
-              onChange={this.hanleChange}
-            />
-          </div>
-          <div className="form-goup">
-            <label htmlFor="password">Password :</label>
-            <input
-              value={this.state.account.password}
-              name="password"
-              id="password"
-              type="password"
-              className="form-control"
-              onChange={this.hanleChange}
-            />
-          </div>
-          <button
-            onClick={this.handleSubmit}
-            className="btn btn-primary mt-4 float-right"
-          >
-            Login
-          </button>
+          <this.renderInput name="username" label="Username" />
+          <this.renderInput name="email" label="Email" />
+          <this.renderInput name="password" label="Password" type="password" />
+          <this.renderSubmit label="Submit" />
         </form>
       </div>
     );
